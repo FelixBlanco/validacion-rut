@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Validacion del RUT</title>
+</head>
+<body>
+
+<h1>Validación de RUT </h1>
+
+<script>
+	
+	var rut = '12345678'; // RUT
+	var data=[]; // Array vacio
+	var resAcu = 7; // Vamos a diminuir desde 7 hasta 2
+
+	document.write("RUT: "+rut+" -? <br>")
+
+	/****
+	| Multiplicamos cada numero
+	**********/
+
+	for(let i=0; i <= 1; i++){ // los 2 primeros
+	
+		if (i == 0 ) {
+			r = rut.substr(i,1);
+			ru = (r*3);
+		}
+
+		if (i == 1) {
+			r = rut.substr(i,1);
+			ru = (r*2);
+		}
+		data.push(ru);
+	} 
+
+	for(let q=2; q <= 7; q++){ // Los ultimos 6
+		r = rut.substr(q,1);
+		ru = (r*resAcu);			
+		resAcu--;
+		data.push(ru);
+	} document.write("Multiplicacion array => "+ data+"<br>");
+
+
+
+
+	/***
+	| Suma de todos los resultados
+	********/
+
+	var total_suma =0;
+	for(let s=0; s <= 7 ; s++){	
+		total_suma += data[s];
+	} document.write("Total de la Suma "+ total_suma+"<br>");
+
+
+	/***
+	| Division del Resultado
+	**************************/	
+
+	var div_decimal = total_suma / 11; // Con decimal
+	var div_entero = Math.trunc(div_decimal); // Sin Decimal
+	document.write("división "+ Math.trunc(div_decimal)+"<br>");
+
+
+
+	/***
+	| Paso Tres 
+	|	( suma - ( 11 * resultado_division) )
+	*********************************************/
+
+	var paso_tres = total_suma - (parseInt(11) * parseInt(div_entero));
+	document.write("Paso Tres: "+ paso_tres+"<br>");
+
+	/***
+	| Resultado
+	***************/
+	var paso_cuatro = parseInt(11) - parseInt(paso_tres);
+	document.write("Resultado: "+ paso_cuatro+"<br>")
+
+	document.write("RUT: "+ rut +"-"+paso_cuatro+"<br>")
+</script>
+
+</body>
+</html>
